@@ -1,0 +1,95 @@
+<html ng-app="myApp">
+	<head>
+		<title> Sample Angular Js Application</title>
+		<script type="text/javascript" src="../lib/angular.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	</head>
+
+	<body ng-controller="MainController">
+		<!-- using scope functions -->
+		<h3>1) Using scope functions</h3>
+		{{sayHello('Jeffin')}}
+
+		<!-- executing scope methods -->
+		<h3>2) Executing scope methods</h3>
+		<p>
+			<input type="text" ng-model="itemIndex"> 
+			<!-- <input type="button" value="Get Item" ng-click="getItem()"> -->
+		</p>
+		<p>Current item : {{ currentItem }}</p>
+
+		<!-- working with bracketted expressions-->
+		<p>Standard bracket exp : {{ randomValue }}</p>
+		<p>One time bracket exp : {{ ::randomValue }}</p>
+		<p>Array bracket exp : {{ scopeArr[1] }}</p>
+		<p>Operation bracket exp : {{ qty * cost }}</p>
+		<p>Greater than 500,000? : {{ randomValue > 500000 }}</p>
+		<p>Enter width : <input type="text" ng-model="pWidth"></p>
+		<p style="width:{{pWidth}}px;">
+		This is a dynamic paragraph!
+		</p>
+
+		<!-- examining dot notation (solving scope hierarchy problem:
+			change to parent scope name var will reflect in child scope name var. But if child scope name var is changed this binding will be broken and change to parent scope name var will not change the child scope name var. To solve this we store name var in scope object 'modelObj' instead of storing it in primitives.
+		) 
+		-->
+		<h3>3) Solving scope hierarchy problem</h3>
+		<div ng-controller="ParentController">
+			<input type="text" ng-model="modelObj.name">
+			<p>Parent Controller : The name is {{ modelObj.name }}</p>
+			<div ng-controller="ChildController">
+				<input type="text" ng-model="modelObj.name">
+				<p>Child Controller : The name is {{ modelObj.name }}</p>
+			</div>
+		</div>
+
+		<!-- using mutiple views for same controller-->
+		<h3>4) Using mutiple views for same controller</h3>
+		<div ng-controller="ParentController">
+			<input type="text" ng-model="modelObj.name">
+			<p>Second Parent Controller : The name is {{ modelObj.name }}</p>
+		</div>
+
+		<!-- using same name scope var for a different controller -->
+		<h3>5) Using same name scope var for a different controller</h3>
+		<div ng-controller="AnotherController">
+			<input type="text" ng-model="modelObj.name">
+			<p>Another Controller : The name is {{ modelObj.name }}</p>
+		</div>
+
+		<!-- Sharing data between multiple controllers -->
+		<h3>6) Sharing data between multiple controllers</h3>
+		<div ng-controller="FirstController">
+			<input type="text" ng-model="modelObj.name">
+			<p>First Controller : The name is {{ modelObj.name }}</p>
+		</div>
+		<div ng-controller="SecondController">
+			<input type="text" ng-model="modelObj.name">
+			<p>Second Controller : The name is {{ modelObj.name }}</p>
+		</div>
+
+		<!-- Using Controller as syntax -->
+		<h3>7) Using Controller as syntax</h3>
+		<div ng-controller="ControllerParent as parent">
+			<p>Parent Controller Message : {{ parent.message }}</p>
+			<div ng-controller="FirstChild as first">
+				<p>Parent Controller Message : {{ parent.message }}</p>
+				<p>First Child Message : {{ first.message }}</p>
+			</div>
+			<div ng-controller="SecondChild as second">
+				<p>Parent Controller Message : {{ parent.message }}</p>
+				<p>Second Child Message : {{ second.message }}</p>
+				<p>Watched Random Value : {{ second.value }}</p>
+			</div>
+		</div>
+
+		<!-- Using Display Filters -->
+		<h3>8) Using Display Filters</h3>
+		<div ng-controller='DisplayFilterSample as displayfiltersample'>
+			<p>First Name : {{displayfiltersample.user.firstName | uppercase }}</p>
+			<p>Last Name : {{displayfiltersample.user.lastName | uppercase }}</p>
+			<p>Account Type : {{displayfiltersample.user.accountType | lowercase }}</p>
+			<p>Balance : {{displayfiltersample.user.balance | currency: 'USD $':2 }}</p>
+		</div>
+	</body>
+</html>
