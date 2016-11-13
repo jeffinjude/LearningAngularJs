@@ -99,3 +99,92 @@ angular.module('myApp').controller('DisplayFilterSample', [function(){
 		balance : '1234.456'
 	};
 }]);
+
+/*Creating custom display filters*/
+angular.module('myApp').filter('capitalize', function(){
+	return function(value){
+		var result = null;
+		var words = value.split(' ');
+		words.forEach(function(item){
+			if(result){
+				result += ' ';
+			}
+			else{
+				result = '';
+			}
+			result += item.substr(0, 1).toUpperCase() + item.substr(1).toLowerCase();
+		});
+		return result;
+	};
+});
+
+/*Using orderBy and limitTo filters*/
+angular.module('myApp').controller('OrderByAndLimitToFilters', [function(){
+	this.userArr = [
+	{
+		firstName : 'User',
+		lastName : 'One',
+		accountType : 'CHECKING',
+		balance : '1234.456'
+	},
+		{
+		firstName : 'User',
+		lastName : 'Two',
+		accountType : 'CHECKING',
+		balance : '1344.456'
+	},
+		{
+		firstName : 'User',
+		lastName : 'Three',
+		accountType : 'CHECKING',
+		balance : '41234.456'
+	},
+		{
+		firstName : 'User',
+		lastName : 'Four',
+		accountType : 'CHECKING',
+		balance : '12444.456'
+	}
+	];
+}]);
+
+/*Using number and json filters */
+angular.module('myApp').controller('NumberAndJsonFilters', [function(){
+	this.userComplexObj = {
+		firstName: 'Jeffin',
+		lastName: 'Pulickal',
+		accountType: {
+			accountId: '12345',
+			name: 'checking'
+		},
+		balance: '5435435.123',
+		hobbies: ['hob1','hob2','hob3']
+	};
+}]);
+
+/*Using date filters */
+angular.module('myApp').controller('DateFilters', [function(){
+	this.currDate = new Date();
+}]);
+
+/*Examining user text input */
+angular.module('myApp').controller('UserTextInput', [function(){
+	this.fruitList = ['bananas','apples','guava'];
+	this.user = {
+		name: 'John Smith',
+		favoriteFruit: 'apples',
+		isActive: true
+	};
+}]);
+
+angular.module('myApp').filter('yesorno', function(){
+	return function(value){
+		if(value === true){
+			return 'yes';
+		} else if (value === false){
+			return 'no';
+		} else {
+			return 'unknown';
+		}
+	};
+});

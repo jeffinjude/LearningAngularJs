@@ -91,5 +91,59 @@
 			<p>Account Type : {{displayfiltersample.user.accountType | lowercase }}</p>
 			<p>Balance : {{displayfiltersample.user.balance | currency: 'USD $':2 }}</p>
 		</div>
+
+		<!-- Creating custom display filters -->
+		<h3>9) Creating custom display filters</h3>
+		<div ng-controller='DisplayFilterSample as displayfiltersample'>
+			<p>First Name : {{displayfiltersample.user.firstName + ' ' + displayfiltersample.user.lastName | capitalize }}</p>
+		</div>
+
+		<!-- Using orderBy and limitTo filters -->
+		<h3>10) Using orderBy and limitTo filters</h3>
+		<div ng-controller='OrderByAndLimitToFilters as orderByAndLimitToFilters'>
+			<ul ng-repeat="user in orderByAndLimitToFilters.userArr | orderBy: '-balance' | limitTo:2:1">
+				<li> Name: {{ user.firstName + ' ' + user.lastName }}</li>
+				<li> Account Type: {{ user.accountType }}</li>
+				<li> Balance: {{ user.balance }}</li>
+			</ul>
+		</div>
+
+		<!-- Using number and json filters -->
+		<h3>11) Using number and json filters</h3>
+		<div ng-controller='NumberAndJsonFilters as numberAndJsonFilters'>
+			<p>{{ 1256366.73773 | number: 3}}</p>
+			<p>{{ numberAndJsonFilters.userComplexObj | json}}</p>
+		</div>
+
+		<!-- Using date filters -->
+		<h3>12) Using date filters</h3>
+		<div ng-controller='DateFilters as dateFilters'>
+			<p>{{ dateFilters.currDate | date: 'shortDate'}}</p>
+		</div>
+
+		<!-- Examining user text input -->
+		<h3>13) Examining user text input</h3>
+		<div ng-controller='UserTextInput as userTextInput'>
+			<p>Name: {{ userTextInput.user.name }}</p>
+			<p>Fav Fruit: {{ userTextInput.user.favoriteFruit }}</p>
+			<p>Is Active?: {{ userTextInput.user.isActive | yesorno }}</p>
+
+			<hr/>
+
+			<p>Enter name:</p>
+			<p><input type="text" ng-model="userTextInput.user.name"></p>
+
+			<p>Select favorite fruit:</p>
+			<p><select ng-model="userTextInput.user.favoriteFruit" ng-options="fruit for fruit in userTextInput.fruitList"></select></p>
+
+			<p>Select active:</p>
+			<p><input type="checkbox" ng-model="userTextInput.user.isActive"> Is Active</p>
+
+			<p>Alternate select active:</p>
+			<p>
+				<input type="radio" ng-model="userTextInput.user.isActive" ng-value="true"> Yes
+				<input type="radio" ng-model="userTextInput.user.isActive" ng-value="false"> No
+			</p>
+		</div>
 	</body>
 </html>
