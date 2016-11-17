@@ -3,6 +3,7 @@
 		<title> Sample Angular Js Application</title>
 		<script type="text/javascript" src="../lib/angular.js"></script>
 		<script type="text/javascript" src="app.js"></script>
+		<link rel="stylesheet" href="main.css">
 	</head>
 
 	<body ng-controller="MainController">
@@ -143,6 +144,66 @@
 			<p>
 				<input type="radio" ng-model="userTextInput.user.isActive" ng-value="true"> Yes
 				<input type="radio" ng-model="userTextInput.user.isActive" ng-value="false"> No
+			</p>
+		</div>
+
+		<!-- User input and validation -->
+		<h3>14) User input and validation</h3>
+		<div ng-controller='UserForm as userForm'>
+			<form name="userform" novalidate>
+				<table class="user-form">
+					<tr>
+						<td>
+							First Name:
+						</td>
+						<td>
+							<input type="text" ng-model="userForm.userdata.firstName" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Last Name:
+						</td>
+						<td>
+							<input type="text" ng-model="userForm.userdata.lastName" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Phone (10 digits):
+						</td>
+						<td>
+							<input type="text" ng-model="userForm.userdata.phone" required ng-minlength="10">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Email Address:
+						</td>
+						<td>
+							<input type="email" ng-model="userForm.userdata.email" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Zip code:
+						</td>
+						<td>
+							<input type="text" ng-model="userForm.userdata.zip" required ng-pattern="/\d{5}">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							&nbsp;
+						</td>
+						<td>
+							<button ng-click="userForm.submitForm(userform)">Submit</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<p>
+			{{userForm.userdata}}
 			</p>
 		</div>
 	</body>

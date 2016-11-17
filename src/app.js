@@ -188,3 +188,17 @@ angular.module('myApp').filter('yesorno', function(){
 		}
 	};
 });
+
+/* User input and validation */
+angular.module('myApp').controller('UserForm', [function(){
+	this.userdata = {
+	};
+	this.submitForm = function(form){
+		if(form.$valid){
+			window.alert("Passed.");
+		}
+		else{
+			window.alert("Failed.");
+		}
+	};
+}]);
